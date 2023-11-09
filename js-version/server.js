@@ -49,24 +49,29 @@ app.post('/process_image', async (req, res) => {
     // Construct the payload for the OpenAI API, including the model to use, the
     // message with a prompt for the image description and the base64 image data.
     const payload = {
-        model: "gpt-4-vision-preview",
-        messages: [{
-            role: "user",
-            content: [{
-                type: "text",
-                text: "Whats in this image? Be descriptive. For each significant item recognized, wrap this word in <b> tags. Example: The image shows a <b>man</b> in front of a neutral-colored <b>wall</b>. He has short hair, wears <b>glasses</b>, and is donning a pair of over-ear <b>headphones</b>. ... Also output an itemized list of objects recognized, wrapped in <br> and <b> tags with label <br><b>Objects:."
-                // The text prompt includes instructions for the OpenAI model to
-                // describe the image and format the response in a certain way.
-            }, {
-                type: "image_url",
-                image_url: {
-                    // Attach the base64 image data to the request, formatted as a
-                    // data URL.
-                    url: `data:image/jpeg;base64,${base64Image}`
-                }
-            }]
-        }],
-        max_tokens: 300 // Set a limit on the number of tokens (words) the model should generate.
+      model: 'gpt-4-vision-preview',
+      messages: [
+        {
+          role: 'user',
+          content: [
+            {
+              type: 'text',
+              text: 'This is a frame of a video from the user\'s camera. Act as a guide for the user who can\'t see, what would they want to know based on what\' in their surroundings? Be descriptive. For each significant item recognized, wrap this word in <b> tags. Example: The image shows a <b>man</b> in front of a neutral-colored <b>wall</b>. He has short hair, wears <b>glasses</b>, and is donning a pair of over-ear <b>headphones</b>. ... Also output an itemized list of objects recognized, wrapped in <br> and <b> tags with label <br><b>Objects:.',
+              // The text prompt includes instructions for the OpenAI model to
+              // describe the image and format the response in a certain way.
+            },
+            {
+              type: 'image_url',
+              image_url: {
+                // Attach the base64 image data to the request, formatted as a
+                // data URL.
+                url: `data:image/jpeg;base64,${base64Image}`,
+              },
+            },
+          ],
+        },
+      ],
+      max_tokens: 300, // Set a limit on the number of tokens (words) the model should generate.
     };
 
     try {
@@ -77,7 +82,7 @@ app.post('/process_image', async (req, res) => {
             headers: headers,
             body: JSON.stringify(payload)
         });
-        
+
         // Parse the JSON response from the OpenAI API.
         const data = await response.json();
         // Send the parsed data back to the client with a 200 OK status.
