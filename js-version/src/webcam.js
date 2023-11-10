@@ -17,9 +17,11 @@ function captureImage() {
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    const base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
-    processImage(base64Image);
+    // compress the image
+    const compressedImage = canvas.toDataURL('image/jpeg', 0.5).split(',')[1];
+    // show the image in the UI
+    document.getElementById('captured-image').src = canvas.toDataURL('image/jpeg', 0.1);
+    processImage(compressedImage);
 }
 
 // Send the image to the server for processing
@@ -46,7 +48,7 @@ function handleResponse(data) {
         appendToChatbox(`Error: ${data.error}`, true);
         return;
     }
-    appendToChatbox(data.choices[0].message.content);
+    appendToChatbox(data.message.content);
 }
 
 // Handle any errors during fetch
@@ -66,7 +68,7 @@ function appendToChatbox(message, isUserMessage = false) {
     const chatbox = document.getElementById('chatbox');
     const messageElement = document.createElement('div');
     const timestamp = new Date().toLocaleTimeString(); // Get the current time as a string
-    
+
     // Assign different classes based on the sender for CSS styling
     messageElement.className = isUserMessage ? 'user-message' : 'assistant-message';
 
@@ -90,12 +92,12 @@ function switchCamera() {
         const constraints = {
             video: { facingMode: (usingFrontCamera ? 'user' : 'environment') }
         };
-        
+
         // Stop any previous stream
         if (video.srcObject) {
             video.srcObject.getTracks().forEach(track => track.stop());
         }
-        
+
         // Start a new stream with the new constraints
         navigator.mediaDevices.getUserMedia(constraints)
             .then(stream => {

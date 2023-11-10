@@ -26,8 +26,6 @@ body {
             overflow-y: auto;
             border: 1px solid #333333; /* Darker border for elements */
             padding: 10px;
-            width: 320px; /* Adjust as needed */
-            margin-left: 20px; /* Adjust as needed */
             background-color: #1e1e1e; /* Dark background for elements */
             border-radius: 8px; /* Rounded corners */
         }
@@ -154,7 +152,7 @@ body {
         width: 100%; /* Full width */
         margin-left: 0; /* Remove margin since it's now below the webcam */
         margin-top: 10px; /* Add some space between the capture button and chatbox */
-      
+
     }
     #footer {
         position: relative; /* Footer should flow in the normal document flow in mobile layout */
@@ -172,4 +170,30 @@ body {
     text-decoration: none; /* Optional: Removes underline from links */
 }
 
- 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.right-column {
+    width: 300px;
+}
+
+.right-column > * {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#captured-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e1e1e;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#captured-image {
+    width: 50%;
+}

@@ -15,11 +15,19 @@
             <button id="switch-camera">Switch Camera</button>
         </div>
 
-        <div id="chatbox">
-            <!-- Loader will go here, hidden initially -->
-            <div class="loader" style="display: none;"></div>
-            <!-- Chat messages with HTML tags will be appended here -->
-        </div>     
+        <div class="flex-column right-column">
+
+            <!-- have a placeholder for the image that's captured to display -->
+            <div id="captured-image-container">
+                <img id="captured-image" src="" alt="Captured Image">
+            </div>
+            <div id="chatbox">
+                <!-- Loader will go here, hidden initially -->
+                <div class="loader" style="display: none;"></div>
+                <!-- Chat messages with HTML tags will be appended here -->
+            </div>
+
+        </div>
     </div>
 
     <script src="webcam.js"></script>
