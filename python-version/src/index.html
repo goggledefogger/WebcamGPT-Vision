@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <title>WebcamGPT-Vision</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="content-container">
         <div id="webcam-container">
@@ -15,11 +17,19 @@
             <button id="switch-camera">Switch Camera</button>
         </div>
 
-        <div id="chatbox">
-            <!-- Loader will go here, hidden initially -->
-            <div class="loader" style="display: none;"></div>
-            <!-- Chat messages with HTML tags will be appended here -->
-        </div>     
+        <div class="flex-column right-column">
+
+            <!-- have a placeholder for the image that's captured to display -->
+            <div id="captured-image-container">
+                <img id="captured-image" src="" alt="Captured Image">
+            </div>
+            <div id="chatbox">
+                <!-- Loader will go here, hidden initially -->
+                <div class="loader" style="display: none;"></div>
+                <!-- Chat messages with HTML tags will be appended here -->
+            </div>
+
+        </div>
     </div>
 
     <script src="webcam.js"></script>
@@ -29,4 +39,5 @@
         Dev'd by <a href="https://twitter.com/BenjaminDEKR">Benjamin De Kraker (Follow on X)</a>
     </div>
 </body>
+
 </html>
