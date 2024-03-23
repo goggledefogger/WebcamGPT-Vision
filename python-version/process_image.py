@@ -65,7 +65,7 @@ def process_image():
             response_json = response.json()
             text = response_json.get('message', '')
             speech = tts.speak(text)
-            return jsonify({'speech': speech}), 200
+            return jsonify({'speech': speech, 'text': text}), 200
         else:
             return jsonify({'error': 'Failed to process the image.'}), 500
 
