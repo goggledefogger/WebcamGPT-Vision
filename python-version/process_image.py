@@ -1,4 +1,5 @@
 import os
+import tortoiseTTS as tts
 
 import requests
 from flask import Flask, request, jsonify
@@ -60,9 +61,13 @@ def process_image():
             json=payload
         )
 
-        if response.status_code != 200:
+        if response.status_code == 200:
+            response_json = response.json()
+            text = response_json.get('message', '')
+            speech = tts.speak(text)
+            return jsonify({'speech': speech}), 200
+        else:
             return jsonify({'error': 'Failed to process the image.'}), 500
-        return response.content
 
     else:
         return jsonify({'error': 'No image data received.'}), 400
