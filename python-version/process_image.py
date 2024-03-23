@@ -8,6 +8,11 @@ app = Flask(__name__, static_folder='src', static_url_path='/')
 # Replace 'YOUR_DEFAULT_API_KEY' with the name of the environment variable
 DEFAULT_API_KEY = os.environ.get('YOUR_DEFAULT_API_KEY', 'YOUR_DEFAULT_API_KEY')
 
+image_prompt = "Describe the image in detail"
+
+# load image prompt from a file
+with open('image_prompt.txt', 'r') as f:
+    image_prompt = f.read()
 
 @app.route('/')
 def index():
@@ -35,7 +40,7 @@ def process_image():
                     "content": [
                         {
                             "type": "text",
-                            "text": "What’s in this image? Be descriptive. For each significant item recognized, wrap this word in <b> tags. Example: The image shows a <b>man</b> in front of a neutral-colored <b>wall</b>. He has short hair, wears <b>glasses</b>, and is donning a pair of over-ear <b>headphones</b>. ... Also output an itemized list of objects recognized, wrapped in <br> and <b> tags with label <br><b>Objects:."
+                            "text": image_prompt
                         },
                         {
                             "type": "image_url",
@@ -50,7 +55,7 @@ def process_image():
         }
 
         response = requests.post(
-            "https://api.openai.com/v1/chat/completions",
+            "http://localhost:1234/v1/chat/completions",
             headers=headers,
             json=payload
         )
