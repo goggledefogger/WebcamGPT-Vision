@@ -62,8 +62,7 @@ def process_image():
         )
 
         if response.status_code == 200:
-            response_json = response.json()
-            text = response_json.get('message', '')
+            text = response.content
             speech = tts.speak(text)
             return jsonify({'speech': speech, 'text': text}), 200
         else:
