@@ -78,8 +78,8 @@ function appendToChatbox(message, isUserMessage = false) {
     ? 'user-message'
     : 'assistant-message';
 
-  messageElement.innerHTML = `<div class="message-content">${message}</div>
-                                <div class="timestamp">${timestamp}</div>`;
+  messageElement.innerHTML = `<div >${message}</div>
+                                <div >${timestamp}</div>`;
   if (chatbox.firstChild) {
     chatbox.insertBefore(messageElement, chatbox.firstChild);
   } else {

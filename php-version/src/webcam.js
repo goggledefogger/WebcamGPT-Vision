@@ -66,12 +66,12 @@ function appendToChatbox(message, isUserMessage = false) {
     const chatbox = document.getElementById('chatbox');
     const messageElement = document.createElement('div');
     const timestamp = new Date().toLocaleTimeString(); // Get the current time as a string
-    
+
     // Assign different classes based on the sender for CSS styling
     messageElement.className = isUserMessage ? 'user-message' : 'assistant-message';
 
-    messageElement.innerHTML = `<div class="message-content">${message}</div>
-                                <div class="timestamp">${timestamp}</div>`;
+    messageElement.innerHTML = `<div >${message}</div>
+                                <div >${timestamp}</div>`;
     if (chatbox.firstChild) {
         chatbox.insertBefore(messageElement, chatbox.firstChild);
     } else {
@@ -90,12 +90,12 @@ function switchCamera() {
         const constraints = {
             video: { facingMode: (usingFrontCamera ? 'user' : 'environment') }
         };
-        
+
         // Stop any previous stream
         if (video.srcObject) {
             video.srcObject.getTracks().forEach(track => track.stop());
         }
-        
+
         // Start a new stream with the new constraints
         navigator.mediaDevices.getUserMedia(constraints)
             .then(stream => {
