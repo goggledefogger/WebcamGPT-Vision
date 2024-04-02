@@ -1,0 +1,13 @@
+[Unit]
+Description=ngrok tunnel server that gives a local server a domain for https
+After=network.target
+
+[Service]
+User=town
+Group=town
+# WorkingDirectory=/home/town/source/WebcamGPT-Vision/python-version
+# Environment="PORT=5002"
+ExecStart=ngrok http 5000 --log /home/town/ngrok.log
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=flask web and api server to serve the website and direct image requests to the model
+After=network.target
+
+[Service]
+User=town
+Group=town
+WorkingDirectory=/home/town/source/WebcamGPT-Vision/python-version
+# Environment="PORT=5002"
+ExecStart=/home/town/miniforge3/condabin/conda run --name myenv python process_image.py
+
+[Install]
+WantedBy=multi-user.target
