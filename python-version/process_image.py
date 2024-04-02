@@ -5,6 +5,10 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__, static_folder='src', static_url_path='/')
 
+# run app on a specific port and host
+PORT = os.environ.get('PORT', 5000)
+HOST = os.environ.get('HOST', '0.0.0.0')
+
 # Replace 'YOUR_DEFAULT_API_KEY' with the name of the environment variable
 DEFAULT_API_KEY = os.environ.get('YOUR_DEFAULT_API_KEY', 'YOUR_DEFAULT_API_KEY')
 
@@ -69,4 +73,4 @@ def process_image():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=PORT, host=HOST)
