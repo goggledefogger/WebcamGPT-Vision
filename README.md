@@ -1,6 +1,6 @@
 # WebcamGPT-Vision
 
-WebcamGPT-Vision is a lightweight web application that enables users to process images from their webcam using OpenAI's GPT-4 Vision API. The application captures images from the user's webcam, sends them to the GPT-4 Vision API, and displays the descriptive results. 
+WebcamGPT-Vision is a lightweight web application that enables users to process images from their webcam using OpenAI's GPT-4 Vision API. The application captures images from the user's webcam, sends them to the GPT-4 Vision API, and displays the descriptive results.
 
 There are three versions of this project: PHP, Node.js, and Python / Flask.
 
@@ -53,7 +53,7 @@ To install WebcamGPT-Vision, follow these steps for the correct version (all are
 5. Start the server with `node server.js`.
 6. Access the application through your web browser at `http://localhost:3000` (or the port you configured).
 
-   
+
 ### Python/Flask Version
 
 1. Clone the repository:

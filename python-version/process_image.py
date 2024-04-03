@@ -1,7 +1,7 @@
 import os
 
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 
 app = Flask(__name__, static_folder='src', static_url_path='/')
 
@@ -23,6 +23,54 @@ def index():
     """Return the index.html page."""
     return app.send_static_file('index.html')
 
+@app.route('/capture_image')
+def capture_image():
+    # Capture image using the webcam attached to the Raspberry Pi
+    camera = cv2.VideoCapture(0)
+    ret, frame = camera.read()
+    camera.release()
+
+    if ret:
+        # Convert the image to JPEG format
+        _, img_encoded = cv2.imencode('.jpg', frame)
+        base64_image = base64.b64encode(img_encoded).decode('utf-8')
+
+        api_key = DEFAULT_API_KEY
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {api_key}"
+        }
+        payload = {
+            "model": "gpt-4-vision-preview",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": image_prompt
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{base64_image}"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "max_tokens": 300
+        }
+        response = requests.post(
+            "http://localhost:1234/v1/chat/completions",
+            headers=headers,
+            json=payload
+        )
+        if response.status_code != 200:
+            return jsonify({'error': 'Failed to process the image.'}), 500
+        return Response(response.content, mimetype='application/json')
+    else:
+        return jsonify({'error': 'Failed to capture image.'}), 500
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
