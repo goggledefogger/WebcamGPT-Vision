@@ -9,6 +9,9 @@ app = Flask(__name__, static_folder='src', static_url_path='/')
 PORT = os.environ.get('PORT', 5000)
 HOST = os.environ.get('HOST', '0.0.0.0')
 
+AI_HOST = os.environ.get('AI_HOST', '192.168.11.11')
+AI_PORT = os.environ.get('AI_PORT', 1234)
+
 # Replace 'YOUR_DEFAULT_API_KEY' with the name of the environment variable
 DEFAULT_API_KEY = os.environ.get('YOUR_DEFAULT_API_KEY', 'YOUR_DEFAULT_API_KEY')
 
@@ -62,7 +65,7 @@ def capture_image():
             "max_tokens": 300
         }
         response = requests.post(
-            "http://localhost:1234/v1/chat/completions",
+            f"http://{AI_HOST}:{AI_PORT}/v1/chat/completions",
             headers=headers,
             json=payload
         )
