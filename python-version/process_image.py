@@ -1,4 +1,5 @@
 import os
+import logging
 
 import requests
 from flask import Flask, request, jsonify, Response
@@ -11,6 +12,8 @@ HOST = os.environ.get('HOST', '0.0.0.0')
 
 AI_HOST = os.environ.get('AI_HOST', '192.168.11.11')
 AI_PORT = os.environ.get('AI_PORT', 1234)
+
+logging.info(f"AI_HOST: {AI_HOST}, AI_PORT: {AI_PORT}")
 
 # Replace 'YOUR_DEFAULT_API_KEY' with the name of the environment variable
 DEFAULT_API_KEY = os.environ.get('YOUR_DEFAULT_API_KEY', 'YOUR_DEFAULT_API_KEY')
