@@ -115,7 +115,7 @@ def process_image():
         }
 
         response = requests.post(
-            "http://localhost:1234/v1/chat/completions",
+            f"http://{AI_HOST}:{AI_PORT}/v1/chat/completions",
             headers=headers,
             json=payload
         )
