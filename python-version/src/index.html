@@ -16,11 +16,20 @@
         <div id="webcam-container">
             <video id="webcam" autoplay playsinline width="640" height="480"></video>
             <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-            <button id="capture" class="button">Capture</button>
-            <button id="switch-camera" class="button">Switch Camera</button>
-            <button id="mute" class="button small-button">
-                <i class="fas fa-volume-up"></i> <span>Sound</span>
-            </button>
+            <div class="flex-row full-width">
+                <button id="capture" class="button">
+                    <i class="fas fa-camera"></i>
+                    <span>capture</span>
+                </button>
+                <button id="switch-camera" class="button">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>switch camera</span>
+                </button>
+                <button id="mute" class="button">
+                    <i class="fas fa-volume-up"></i>
+                    <span></span>
+                </button>
+            </div>
         </div>
 
         <div class="flex-column right-column">

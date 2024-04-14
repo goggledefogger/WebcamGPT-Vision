@@ -127,14 +127,23 @@ function switchCamera() {
 // Function to toggle the mute state of text to speech
 function toggleMute() {
   const muteButton = document.getElementById('mute');
-  const soundSpan = muteButton.querySelector('span'); // Get the span element inside the button
+  const buttonIcon = muteButton.querySelector('i');
+  // Get the span element inside the button
+  const buttonSpan = muteButton.querySelector('span');
+
   const isMuted = muteButton.classList.contains('muted');
   muteButton.classList.toggle('muted');
   if (isMuted) {
-    soundSpan.innerText = 'Sound';
+    // change the icon to the unmute icon
+    buttonIcon.classList.remove('fa-volume-mute');
+    buttonIcon.classList.add('fa-volume-up');
+    buttonSpan.innerText = '';
     muteButton.title = 'Click to mute the assistant';
   } else {
-    soundSpan.innerText = 'Mute';
+    // change the icon to the mute icon
+    buttonIcon.classList.remove('fa-volume-up');
+    buttonIcon.classList.add('fa-volume-mute');
+    buttonSpan.innerText = 'muted';
     muteButton.title = 'Click to unmute the assistant';
   }
 }
