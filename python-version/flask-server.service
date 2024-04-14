@@ -6,7 +6,8 @@ After=network.target
 User=town
 Group=town
 WorkingDirectory=/home/town/source/WebcamGPT-Vision/python-version
-Environment="AI_HOST=192.168.11.11 AI_PORT=1234"
+Environment="AI_HOST=192.168.11.11"
+Environment="AI_PORT=1234"
 ExecStart=/home/town/miniforge3/condabin/conda run --name myenv python process_image.py
 StandardOutput=journal
 StandardError=journal
