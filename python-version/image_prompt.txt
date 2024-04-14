@@ -23,4 +23,6 @@ mistake things for people that are not people, so if you're not sure, say "it lo
 - In the responses, don't start with phrases like "the image is" or "in this photo" or
 "the scene shows", just immediately describe the content of the image
 
-- The respondes should on average be 4 sentences long
+- The respondes should on average be 3 sentences long
+
+- Don't use filler words

@@ -19,11 +19,11 @@ function captureImage() {
   const context = canvas.getContext('2d');
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
   // compress the image
-  const compressedImage = canvas.toDataURL('image/jpeg', 0.5).split(',')[1];
+  const compressedImage = canvas.toDataURL('image/jpeg', 0.8).split(',')[1];
   // show the image in the UI
   document.getElementById('captured-image').src = canvas.toDataURL(
     'image/jpeg',
-    0.1
+    0.2
   );
   processImage(compressedImage);
 }
