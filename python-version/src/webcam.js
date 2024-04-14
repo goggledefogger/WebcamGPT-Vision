@@ -52,7 +52,12 @@ function handleResponse(data) {
     appendToChatbox(`Error: ${data.error}`, true);
     return;
   }
-  appendToChatbox(data.choices[0].message.content);
+  const responseText = data.choices[0].message.content;
+  appendToChatbox(responseText);
+  // if it's not muted, speak the response
+  if (!document.getElementById('mute').classList.contains('muted')) {
+    speakText(responseText);
+  }
 }
 
 // Handle any errors during fetch
@@ -85,6 +90,9 @@ function appendToChatbox(message, isUserMessage = false) {
   } else {
     chatbox.appendChild(messageElement);
   }
+
+  // Scroll to the bottom after adding a new message
+  chatbox.scrollTop = chatbox.scrollHeight;
 }
 
 // Function to switch the camera source
@@ -116,6 +124,21 @@ function switchCamera() {
   };
 }
 
+// Function to toggle the mute state of text to speech
+function toggleMute() {
+  const muteButton = document.getElementById('mute');
+  const soundSpan = muteButton.querySelector('span'); // Get the span element inside the button
+  const isMuted = muteButton.classList.contains('muted');
+  muteButton.classList.toggle('muted');
+  if (isMuted) {
+    soundSpan.innerText = 'Sound';
+    muteButton.title = 'Click to mute the assistant';
+  } else {
+    soundSpan.innerText = 'Mute';
+    muteButton.title = 'Click to unmute the assistant';
+  }
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', function () {
   initializeWebcam();
@@ -125,5 +148,5 @@ document.addEventListener('DOMContentLoaded', function () {
     .getElementById('switch-camera')
     .addEventListener('click', switchCamera());
 
-  // Other event listeners here...
+  document.getElementById('mute').addEventListener('click', toggleMute);
 });

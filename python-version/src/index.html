@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>WebcamGPT-Vision</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -13,26 +16,25 @@
         <div id="webcam-container">
             <video id="webcam" autoplay playsinline width="640" height="480"></video>
             <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-            <button id="capture">Capture</button>
-            <button id="switch-camera">Switch Camera</button>
+            <button id="capture" class="button">Capture</button>
+            <button id="switch-camera" class="button">Switch Camera</button>
+            <button id="mute" class="button small-button">
+                <i class="fas fa-volume-up"></i> <span>Sound</span>
+            </button>
         </div>
 
         <div class="flex-column right-column">
-
-            <!-- have a placeholder for the image that's captured to display -->
             <div id="captured-image-container">
                 <img id="captured-image" src="" alt="Captured Image">
             </div>
             <div id="chatbox">
-                <!-- Loader will go here, hidden initially -->
                 <div class="loader" style="display: none;"></div>
-                <!-- Chat messages with HTML tags will be appended here -->
             </div>
-
         </div>
     </div>
 
     <script src="webcam.js"></script>
+    <script src="tts.js"></script>
 
     <div id="footer">
         Webcam is local on your browser, and <b>no images or keys are saved</b> by this demo.<br>
