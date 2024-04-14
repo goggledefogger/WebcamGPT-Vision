@@ -1,7 +1,7 @@
 import os
 import logging
 
-logging.basicConfig(filename='flask-server.log', level=logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 import requests
 from flask import Flask, request, jsonify, Response
@@ -82,50 +82,54 @@ def capture_image():
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
-    data = request.json
-    base64_image = data.get('image', '')
+    try:
+        data = request.json
+        base64_image = data.get('image', '')
 
-    if base64_image:
-        api_key = DEFAULT_API_KEY
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
-        }
+        if base64_image:
+            api_key = DEFAULT_API_KEY
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}"
+            }
 
-        payload = {
-            "model": "gpt-4-vision-preview",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": image_prompt
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}"
+            payload = {
+                "model": "gpt-4-vision-preview",
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "text",
+                                "text": image_prompt
+                            },
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{base64_image}"
+                                }
                             }
-                        }
-                    ]
-                }
-            ],
-            "max_tokens": 300
-        }
+                        ]
+                    }
+                ],
+                "max_tokens": 300
+            }
 
-        response = requests.post(
-            f"http://{AI_HOST}:{AI_PORT}/v1/chat/completions",
-            headers=headers,
-            json=payload
-        )
+            response = requests.post(
+                f"http://{AI_HOST}:{AI_PORT}/v1/chat/completions",
+                headers=headers,
+                json=payload
+            )
 
-        if response.status_code != 200:
-            return jsonify({'error': 'Failed to process the image.'}), 500
-        return response.content
+            if response.status_code != 200:
+                return jsonify({'error': 'Failed to process the image.'}), 500
+            return response.content
 
-    else:
-        return jsonify({'error': 'No image data received.'}), 400
+        else:
+            return jsonify({'error': 'No image data received.'}), 400
+    except Exception as e:
+        logging.error(e)
+        return jsonify({'error': 'Failed to process the image.'}), 500
 
 
 if __name__ == '__main__':
