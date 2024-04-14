@@ -3,7 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     background-color: #121212;
     color: #ffffff;
     height: 100vh;
@@ -62,10 +62,6 @@ body {
     background-color: #454545;
     transform: scale(1.05);
     /* Adds a subtle scaling effect */
-}
-
-#capture {
-    margin-top: 20px;
 }
 
 #chatbox .user-message:nth-child(odd),
@@ -140,7 +136,7 @@ body {
     display: none;
 }
 
-/* Media query for mobile screens */
+/* Media query for mobile screens with portrait */
 @media (max-width: 768px) {
     #switch-camera {
         display: block;
@@ -151,21 +147,37 @@ body {
         align-items: stretch;
     }
 
+    .button span {
+        display: none;
+    }
+
     #content-container {
         flex-direction: column;
         align-items: stretch;
         margin: 0;
+        /* margin-top: 150px; */
+    }
+
+    @media screen and (orientation: landscape) {
+        #content-container {
+            flex-direction: row;
+        }
     }
 
     #webcam-container {
-        width: 100%;
         margin-right: 0;
-        max-height: 50%;
+        /* max-height: 50%; */
+        flex-direction: row;
     }
 
     #webcam {
         width: 100%;
         height: 200px;
+        margin-right: 10px;
+    }
+
+    .right-column {
+        margin-top: 10px;
     }
 
     #chatbox {
