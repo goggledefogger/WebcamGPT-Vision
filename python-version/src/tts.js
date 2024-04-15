@@ -4,3 +4,6 @@ function speakText(text) {
   window.speechSynthesis.speak(utterance);
 }
 
+function stopSpeaking() {
+  window.speechSynthesis.cancel();
+}

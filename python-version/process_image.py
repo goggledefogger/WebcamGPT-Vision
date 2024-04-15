@@ -86,6 +86,11 @@ def process_image():
         data = request.json
         base64_image = data.get('image', '')
 
+        # get the size of the image in kbs
+        image_size = len(base64_image) / 1024
+        logging.info(f"Image size: {image_size} KB")
+
+
         if base64_image:
             api_key = DEFAULT_API_KEY
             headers = {

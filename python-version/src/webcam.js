@@ -145,6 +145,9 @@ function toggleMute() {
     buttonIcon.classList.add('fa-volume-mute');
     buttonSpan.innerText = 'muted';
     muteButton.title = 'Click to unmute the assistant';
+
+    // if the audio is currently playing, stop it
+    stopSpeaking();
   }
 }
 
